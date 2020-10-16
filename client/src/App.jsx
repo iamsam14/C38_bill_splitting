@@ -35,7 +35,6 @@ const App = () => {
               <Route exact path="/update-password" component={UpdatePassword} />
               <Route exact path="/history" component={BillHistory} />
               <PrivateRoute exact path="/home" component={Home} />
-              {/* <PrivateRoute exact path="/profile" component={Profile} /> */}
               <PrivateRoute exact path="/profile" component={Profile} />
               <Route exact path="/billpage" component={BillPage} />
               <Elements stripe={stripePromise}>
