@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import AppContext from '../context/AppContext';
+// import AppContext from '../context/AppContext';
 import * as FaIcons from 'react-icons/fa';
 import * as IoIcons from 'react-icons/io';
 import { IoMdContact } from 'react-icons/io';
@@ -11,7 +11,7 @@ import { IconContext } from 'react-icons';
 import { Navbar } from 'react-bootstrap';
 
 const HomeNav = ({ history }) => {
-  const { setCurrentUser } = useContext(AppContext);
+  // const { setCurrentUser } = useContext(AppContext);
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -21,7 +21,7 @@ const HomeNav = ({ history }) => {
       .post('/api/users/logout', { withCredentials: true })
       .then(() => {
         console.log('object');
-        setCurrentUser(null);
+        // setCurrentUser(null);
         sessionStorage.removeItem('user');
         history.push('/login');
       })
