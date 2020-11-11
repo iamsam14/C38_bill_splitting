@@ -14,6 +14,15 @@ const SignUpPage = ({ history }) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
+  const login = () => {
+    axios
+      .post('/api/users/login', formData)
+      .then((res) => {
+        history.push('/home');
+      })
+      .catch((error) => console.log(error));
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
@@ -21,7 +30,7 @@ const SignUpPage = ({ history }) => {
       .then((response) => {
         sessionStorage.setItem('user', response.data);
         setCurrentUser(response.data);
-        history.push('/home');
+        login();
       })
       .catch((error) => swal('Error', 'Please check the inputs', 'warning'));
   };

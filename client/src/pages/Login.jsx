@@ -6,6 +6,7 @@ import axios from 'axios';
 import Navigation from '../components/Navigation';
 
 const Login = ({ history }) => {
+  const { currentUser } = useContext(AppContext);
   const [formData, setFormData] = useState(null);
   const { setCurrentUser } = useContext(AppContext);
 
@@ -25,12 +26,14 @@ const Login = ({ history }) => {
   return (
     <>
       <Navigation />
+      <button onClick={() => console.log(currentUser)}>button</button>
+
       <Container className="logincontainer d-flex flex-column align-items-center justify-content-center fullscreen">
         <h3 className="title">Welcome back!</h3>
-        <h8 className="ml-2 mr-4 mb-4 mt-1">
+        <h6 className="ml-2 mr-4 mb-4 mt-1">
           Make sure to checkout your daily rewards and discounts in your
           dashboard
-        </h8>
+        </h6>
         <Form style={{ width: 300 }} onSubmit={handleSubmit}>
           <Form.Group>
             <Form.Label htmlFor="email">Email Address</Form.Label>

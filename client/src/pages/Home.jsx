@@ -6,16 +6,21 @@ import { Link } from 'react-router-dom';
 import './Home.css';
 import { Container } from 'react-bootstrap';
 import Carousel from 'react-bootstrap/Carousel';
+import { useContext } from 'react';
+import { AppContext } from '../context/AppContext';
 
 const Home = () => {
+  const { currentUser } = useContext(AppContext);
   return (
     <>
       <HomeNav />
+      <button onClick={() => console.log(currentUser)}>button</button>
       <Image
         src={
           'https://res.cloudinary.com/jeanniet89/image/upload/v1599014269/download_evcdkq.png'
         }
-        alt="cell scanner" fluid
+        alt="cell scanner"
+        fluid
       />
       <Container className="homecontainer">
         <Link to="/billpage">

@@ -1,26 +1,15 @@
 const { welcomeText } = require('../../db/twilio/send_sms'),
   router = require('express').Router(),
-  isAdmin = require('../../db/middleware/authorization/authorization'),
-  passport = require('../../db/middleware/authentication/authentication');
+  isAdmin = require('../../db/middleware/authorization/authorization');
 
 router.get(
   '/api/users/me',
-  router.use(
-    passport.authenticate('jwt', {
-      session: false
-    })
-  ),
   async (req, res) => res.json(req.user)
 );
 
 router.get(
   '/api/admin',
   isAdmin(),
-  router.use(
-    passport.authenticate('jwt', {
-      session: false
-    })
-  ),
   async (req, res) => {
     try {
       res.json({ message: 'admin user' });
@@ -32,11 +21,6 @@ router.get(
 
 router.patch(
   '/api/users/me',
-  router.use(
-    passport.authenticate('jwt', {
-      session: false
-    })
-  ),
   async (req, res) => {
     const updates = Object.keys(req.body);
     const allowedUpdates = [
@@ -64,11 +48,6 @@ router.patch(
 
 router.post(
   '/api/users/logout',
-  router.use(
-    passport.authenticate('jwt', {
-      session: false
-    })
-  ),
   async (req, res) => {
     try {
       req.user.tokens = req.user.tokens.filter((token) => {
@@ -85,11 +64,6 @@ router.post(
 
 router.post(
   '/api/users/logoutAll',
-  router.use(
-    passport.authenticate('jwt', {
-      session: false
-    })
-  ),
   async (req, res) => {
     try {
       req.user.tokens = [];
@@ -104,11 +78,6 @@ router.post(
 
 router.put(
   '/api/password',
-  router.use(
-    passport.authenticate('jwt', {
-      session: false
-    })
-  ),
   async (req, res) => {
     try {
       req.user.password = req.body.password;
@@ -123,11 +92,6 @@ router.put(
 
 router.delete(
   '/api/users/me',
-  router.use(
-    passport.authenticate('jwt', {
-      session: false
-    })
-  ),
   async (req, res) => {
     try {
       await req.user.remove();

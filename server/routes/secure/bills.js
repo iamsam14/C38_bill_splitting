@@ -1,26 +1,15 @@
 const router = require('express').Router(),
   Bill = require('../../db/models/bill'),
   User = require('../../db/models/user'),
-  stripe = require('stripe')(process.env.STRIPE_SECRET_KEY),
-  passport = require('../../db/middleware/authentication/authentication');
+  stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 router.get(
   '/api/bill/me',
-  router.use(
-    passport.authenticate('jwt', {
-      session: false
-    })
-  ),
   async (req, res) => res.json(req.bill)
 );
 
 router.post(
   '/api/bill/checkout',
-  router.use(
-    passport.authenticate('jwt', {
-      session: false
-    })
-  ),
   async (req, res) => {
     const { amountDue, token } = req.body;
 
@@ -59,11 +48,6 @@ router.post(
 
 router.get(
   'api/bill/me/:id',
-  router.use(
-    passport.authenticate('jwt', {
-      session: false
-    })
-  ),
   async (req, res) => {
     try {
       const findBill = Bill.findById(req.params.id);
@@ -76,11 +60,6 @@ router.get(
 
 router.patch(
   'api/bill/me/:id',
-  router.use(
-    passport.authenticate('jwt', {
-      session: false
-    })
-  ),
   async (req, res) => {
     const updates = Object.keys(req.body);
     const allowedUpdates = ['party'];

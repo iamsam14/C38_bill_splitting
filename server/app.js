@@ -3,10 +3,10 @@ if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 const express = require('express'),
   app = express(),
   cookieParser = require('cookie-parser'),
-  // bodyParser = require('body-parser'),
   openRoutes = require('./routes/open'),
   userRouter = require('./routes/secure/users'),
   billRouter = require('./routes/secure/bills'),
+  passport = require('./db/middleware/authentication/authentication'),
   path = require('path');
 
 // Parse incoming JSON into objectsx
@@ -16,10 +16,14 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-app.use(openRoutes);
-// app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(openRoutes);
 
+app.use(
+  passport.authenticate("jwt", {
+    session: false,
+  })
+);
 app.use(userRouter);
 app.use(billRouter);
 

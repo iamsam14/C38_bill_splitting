@@ -1,16 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import axios from 'axios';
+import AppContext from '../context/AppContext';
+import * as FaIcons from 'react-icons/fa';
+import * as IoIcons from 'react-icons/io';
 import { IoMdContact } from 'react-icons/io';
 import * as AiIcons from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { SidebarData } from './Sidebardata';
 import '../App.css';
 import { IconContext } from 'react-icons';
 import { Navbar } from 'react-bootstrap';
 
-function HomeNav() {
+const HomeNav = ({ history }) => {
+  const { setCurrentUser } = useContext(AppContext);
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
+
+  const handleLogout = () => {
+    axios
+      .post('/api/users/logout', { withCredentials: true })
+      .then(() => {
+        console.log('object');
+        setCurrentUser(null);
+        sessionStorage.removeItem('user');
+        history.push('/login');
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <>
@@ -39,28 +55,28 @@ function HomeNav() {
                   <AiIcons.AiOutlineClose />
                 </Link>
               </li>
-              {SidebarData.map((item, index) => {
-                const CustomComponent = item.customComponent;
-
-                return (
-                  <li key={index} className={item.cName}>
-                    {CustomComponent ? (
-                      <CustomComponent />
-                    ) : (
-                      <Link to={item.path}>
-                        {item.icon}
-                        <span>{item.title}</span>
-                      </Link>
-                    )}
-                  </li>
-                );
-              })}
+              <li className="nav-text">
+                <Link to="/profile">
+                  <IoIcons.IoIosPaper /> <span>Profile</span>
+                </Link>
+              </li>
+              <li className="nav-text">
+                <Link to="/history">
+                  <FaIcons.FaCartPlus /> <span>Bill History</span>
+                </Link>
+              </li>
+              <li className="nav-text">
+                <Link>
+                  <IoIcons.IoIosPeople />
+                  <span onClick={() => handleLogout()}>Logout</span>
+                </Link>
+              </li>
             </ul>
           </nav>
         </IconContext.Provider>
       </Navbar>
     </>
   );
-}
+};
 
 export default HomeNav;
