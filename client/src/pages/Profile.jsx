@@ -47,7 +47,7 @@ const Profile = ({ history }) => {
 
   return (
     <>
-      <HomeNav />
+      <HomeNav setCurrentUser={setCurrentUser} />
       <Container className="d-flex flex-column align-items-center justify-content-center">
         <h1>Your Profile</h1>
         <div>

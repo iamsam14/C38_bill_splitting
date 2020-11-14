@@ -10,11 +10,10 @@ import { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const Home = () => {
-  const { currentUser } = useContext(AppContext);
+  const { currentUser, setCurrentUser } = useContext(AppContext);
   return (
     <>
-      <HomeNav />
-      <button onClick={() => console.log(currentUser)}>button</button>
+      <HomeNav setCurrentUser={setCurrentUser} />
       <Image
         src={
           'https://res.cloudinary.com/jeanniet89/image/upload/v1599014269/download_evcdkq.png'

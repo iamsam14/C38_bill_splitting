@@ -26,7 +26,6 @@ const Login = ({ history }) => {
   return (
     <>
       <Navigation />
-      <button onClick={() => console.log(currentUser)}>button</button>
 
       <Container className="logincontainer d-flex flex-column align-items-center justify-content-center fullscreen">
         <h3 className="title">Welcome back!</h3>
