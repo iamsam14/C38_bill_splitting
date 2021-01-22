@@ -16,7 +16,7 @@ const Navigation = () => {
       </Navbar.Brand>
       <Nav>
         <Nav.Item>
-          <Button id="navbtn" href="./login" variant="link">
+          <Button id="navbtn" href="/login" variant="link">
             Log In
           </Button>
         </Nav.Item>
