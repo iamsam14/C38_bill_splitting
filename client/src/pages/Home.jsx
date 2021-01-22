@@ -10,7 +10,7 @@ import { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const Home = () => {
-  const { currentUser, setCurrentUser } = useContext(AppContext);
+  const { setCurrentUser } = useContext(AppContext);
   return (
     <>
       <HomeNav setCurrentUser={setCurrentUser} />
