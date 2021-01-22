@@ -6,7 +6,6 @@ import axios from 'axios';
 import Navigation from '../components/Navigation';
 
 const Login = ({ history }) => {
-  const { currentUser } = useContext(AppContext);
   const [formData, setFormData] = useState(null);
   const { setCurrentUser } = useContext(AppContext);
 
